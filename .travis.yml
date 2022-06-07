@@ -5,23 +5,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t oleksii.sodolinskyi/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t number1/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true oleksii.sodolinskyi/react-test npm test
+  - docker run -e CI=true number1/react-test npm test
 
 after_success:
-  - docker build -t oleksii.sodolinskyi/multi-client ./client
-  - docker build -t oleksii.sodolinskyi/multi-nginx ./nginx
-  - docker build -t oleksii.sodolinskyi/multi-server ./server
-  - docker build -t oleksii.sodolinskyi/multi-worker ./worker
+  - docker build -t number1/multi-client ./client
+  - docker build -t number1/multi-nginx ./nginx
+  - docker build -t number1/multi-server ./server
+  - docker build -t number1/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push oleksii.sodolinskyi/multi-client
-  - docker push oleksii.sodolinskyi/multi-nginx
-  - docker push oleksii.sodolinskyi/multi-server
-  - docker push oleksii.sodolinskyi/multi-worker
+  - docker push number1/multi-client
+  - docker push number1/multi-nginx
+  - docker push number1/multi-server
+  - docker push number1/multi-worker
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "us-east-1"
